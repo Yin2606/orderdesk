@@ -2,7 +2,13 @@ const test = require('node:test');
 const assert = require('node:assert');
 const { openReturn } = require('./returns');
 
-const order = { id: 'ODK-1', lines: [{ sku: 'A1', quantity: 2 }] };
+const order = {
+  id: 'ODK-1',
+  lines: [
+    { sku: 'A1', quantity: 2 },
+    { sku: 'B2', quantity: 2 },
+  ],
+};
 
 test('refuses a return of only final-clearance lines', () => {
   assert.throws(
