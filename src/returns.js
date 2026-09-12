@@ -21,6 +21,12 @@ function openReturn(order, lines) {
     if (!ordered.has(line.sku)) {
       throw new Error(`sku ${line.sku} is not on order ${order.id}`);
     }
+
+    if (line.quantity > ordered.get(line.sku)) {
+      throw new Error(
+        `sku ${line.sku}: returning ${line.quantity} but only ${ordered.get(line.sku)} were ordered`
+      );
+    }
   }
 
   return {
