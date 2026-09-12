@@ -15,6 +15,14 @@ function openReturn(order, lines) {
     throw new Error('a return must cover at least one line');
   }
 
+  const ordered = new Map(order.lines.map((line) => [line.sku, line.quantity]));
+
+  for (const line of lines) {
+    if (!ordered.has(line.sku)) {
+      throw new Error(`sku ${line.sku} is not on order ${order.id}`);
+    }
+  }
+
   return {
     orderId: order.id,
     lines,
